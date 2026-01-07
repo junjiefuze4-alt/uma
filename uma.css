@@ -1,0 +1,209 @@
+@charset "utf-8";
+
+/* ============================================================
+   ■ 全体設定
+   - 背景色、余白リセット、タイトルなどページ全体の基本設定
+   ============================================================ */
+
+/* ページ全体の背景色 */
+body {
+  background-color: #333;
+}
+
+/* ページタイトル（h1） */
+h1 {
+  color: #fefefe;
+  text-align: center;
+}
+
+p {
+  color: #fff;
+}
+
+.year-highlight {
+  color: #ffcc00; /* 目立つ黄色系（黒背景に映える） */
+  font-weight: bold;
+}
+
+/* ページ上部の大きな画像（ヘッダー画像）
+   → 画面幅いっぱいに広げるため width:100vw を使用 */
+img {
+  display: block;
+  width: 100vw;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* HTML と body の余白を完全にゼロにする */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   ■ テキスト系（タイトル・補足・段落）
+   ============================================================ */
+
+/* セクションタイトル（例：所有競走馬） */
+.section-title {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+/* タイトル横の補足（note） */
+.note {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #f8f8f8;
+}
+
+/* 通常の段落 */
+p {
+  font-size: 18px;
+}
+
+/* ============================================================
+   ■ 馬カード（左側の一覧）
+   ============================================================ */
+
+/* 馬カード全体を並べるコンテナ
+   - 横並び（flex）
+   - 折り返しあり
+   - 左寄せ
+*/
+.horse {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* 1頭分の馬カード */
+.horse1 {
+  width: calc(50% - 20px); /* 横2枚に並べる幅 */
+  max-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 10px;
+}
+
+/* 馬カード内の画像 */
+.horse1 img {
+  width: 100%;
+  height: 200px; /* 高さ固定で揃える */
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* 馬の名前（史実馬：赤） */
+.horse1 a,
+.horse1 h3 {
+  font-size: 18px;
+  margin: 8px 0 4px;
+  color: #c00;
+}
+
+/* 主な勝鞍（G1） */
+.horse1 p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* 牝馬（horse2）はピンクで強調 */
+.horse2 a,
+.horse2 h3 {
+  color: deeppink;
+}
+
+/* ============================================================
+   ■ レイアウト（左：馬カード / 右：白枠）
+   ============================================================ */
+
+/* 左右を並べる大枠
+   - flex で横並び
+   - flex-start にすることで白枠が下に落ちない
+   - max-width で全画面時の広がりすぎを防ぐ
+*/
+.layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start; /* ← 白枠が下に落ちない */
+  flex-wrap: wrap; /* ← 画面が狭いときに折り返す */
+  max-width: 1650px; /* ← 全画面時の横幅制限 */
+  margin: 0 auto; /* ← 中央寄せ */
+  padding: 20px;
+}
+
+/* 右側の白い情報欄 */
+.side-info {
+  width: 300px;
+  flex-shrink: 0; /* ← 左が伸びても幅が縮まない */
+  background: #fff4f4;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ライバル馬のリンク */
+.rival-list a {
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   ■ 年代切替ナビ（1985年 / 1986年 など）
+   ============================================================ */
+
+.year-nav {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.year-nav a {
+  margin: 0 10px;
+  padding: 6px 12px;
+  background: #fff4f4;
+  border-radius: 6px;
+  color: #c00;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.year-nav a:hover {
+  background: #ffeaea;
+}
+
+/* ============================================================
+   ■ スマホ対応（768px以下）
+   - レイアウトを縦並びに変更
+   - 白枠を下に移動
+   - 馬カードを画面幅に合わせて拡大
+   ============================================================ */
+
+@media screen and (max-width: 768px) {
+  .layout {
+    flex-direction: column; /* ← 縦並びにする */
+    align-items: center;
+  }
+
+  .horse {
+    justify-content: center; /* ← 中央寄せ */
+  }
+
+  .side-info {
+    width: 90%; /* ← スマホ幅に合わせる */
+    margin-top: 20px;
+  }
+
+  .horse1 {
+    width: 90%; /* ← カードを大きくして見やすく */
+    max-width: 300px;
+  }
+}
